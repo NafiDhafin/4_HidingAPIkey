@@ -2,10 +2,7 @@ let lat, lon, pm, par;
 
 const button = document.getElementById('checkIn')
 button.addEventListener('click', async event => {
-        getData().catch((error) => {
-            console.log("something went wrong");
-            console.error(error);
-    });
+        getData()
 })
 
 async function getData(params) {
@@ -22,10 +19,17 @@ async function getData(params) {
 
         document.getElementById('city').textContent = kota
         document.getElementById('temp').textContent = data.data.iaqi.t.v
+        
         document.getElementById('pm').textContent = data.data.aqi
         document.getElementById('lat').textContent = lat.toFixed(2)
         document.getElementById('lon').textContent = lon.toFixed(2)
         document.getElementById('upd').textContent = data.data.time.s
+        if (data.data.iaqi.pm10 == undefined) {
+            document.getElementById('par').textContent = "[data tidak tersedia]"
+        } else {
+            document.getElementById('par').textContent = data.data.iaqi.pm10.v
+        }
+        
 
             const db_data = {data, kota}
             const option = {
@@ -37,4 +41,5 @@ async function getData(params) {
         }
         const db_response = await fetch('/api',option)
         const db_json = await db_response.json();
+        
 }

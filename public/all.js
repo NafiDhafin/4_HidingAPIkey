@@ -16,7 +16,12 @@ async function getData() {
     let lat = item.data.data.city.geo[0];
     let lon = item.data.data.city.geo[1];
     const marker = L.marker([lat, lon]).addTo(map);
-    const txt = `kota : ${item.kota.toUpperCase()}. garis lintang : ${lat} garis bujur : ${lon}. memiliki suhu rata-rata ${item.data.data.iaqi.t.v}°C, dengan tingkat pencemaran udara sebesar ${item.data.data.aqi} `;
+    let txt = `negara/kota : ${item.kota.toUpperCase()}. garis lintang : ${lat} garis bujur : ${lon}. memiliki suhu rata-rata ${item.data.data.iaqi.t.v}°C, dengan tingkat pencemaran udara sebesar ${item.data.data.aqi} `;
+    if (item.data.data.iaqi.pm10 == undefined) {
+      txt += "dan kepadatan partikel tiap meter kubiknya [data tidak tersedia]. "
+  } else {
+      txt += `dan kepadatan partikel tiap meter kubiknya ${item.data.data.iaqi.pm10.v}.`
+  }
 
     marker.bindPopup(txt);
   }
