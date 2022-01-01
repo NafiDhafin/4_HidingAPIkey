@@ -3,10 +3,10 @@ test
 …or create a new repository on the command line
 echo "# 4_HidingAPIkey" >> README.md
 git init (tidak perlu di commit dahulu)
-git add .
+git add . 
 git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/NafiDhafin/4_HidingAPIkey.git
+git branch -M main (jika tidak ingin membuat cabang maka tidak usah)
+git remote add origin https://github.com/NafiDhafin/5_CreateLink.git (link sesuai dengan yang di github)
 git push -u origin master
 
 …or push an existing repository from the command line
