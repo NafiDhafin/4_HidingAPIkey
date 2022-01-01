@@ -13,13 +13,16 @@ async function getData(params) {
         console.log("the data")
 
         const data = await response.json()
-        lat = data.data.city.geo[0]
+        if (data.data.city == undefined) {
+            document.getElementById('city').textContent = kota
+            document.getElementById('no').textContent = "data tidak tersedia"
+        } else {
+            lat = data.data.city.geo[0]
         lon = data.data.city.geo[1]
         console.log(data);
 
         document.getElementById('city').textContent = kota
         document.getElementById('temp').textContent = data.data.iaqi.t.v
-        
         document.getElementById('pm').textContent = data.data.aqi
         document.getElementById('lat').textContent = lat.toFixed(2)
         document.getElementById('lon').textContent = lon.toFixed(2)
@@ -29,7 +32,7 @@ async function getData(params) {
         } else {
             document.getElementById('par').textContent = data.data.iaqi.pm10.v
         }
-        
+        document.getElementById('no').textContent = "tersedia"
 
             const db_data = {data, kota}
             const option = {
@@ -41,5 +44,6 @@ async function getData(params) {
         }
         const db_response = await fetch('/api',option)
         const db_json = await db_response.json();
+        }
         
 }

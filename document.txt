@@ -2,7 +2,7 @@ test
 
 …or create a new repository on the command line
 echo "# 4_HidingAPIkey" >> README.md
-git init
+git init (tidak perlu di commit dahulu)
 git add .
 git commit -m "first commit"
 git branch -M main
